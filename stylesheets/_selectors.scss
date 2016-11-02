@@ -1,0 +1,22 @@
+//
+// mixins
+// --------------------------------------------------------------------------
+
+
+  @mixin sibling-of($sibs: '*') {
+    @at-root #{insert-parents($sibs, '~')} {
+      @content;
+    }
+  }
+
+  @mixin adjacent-to($sibs: '*') {
+    @at-root #{insert-parents($sibs, '+')} {
+      @content;
+    }
+  }
+
+  @mixin adjacent-self {
+    @at-root #{insert-parents(last-parents(), '+')} {
+      @content;
+    }
+  }

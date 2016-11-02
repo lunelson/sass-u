@@ -1,0 +1,15 @@
+{
+  "name": "sass-u",
+  "version": "0.9.0",
+  "description": "Unit manipulation and introspection for Sass",
+  "main": "_index.scss",
+  "scripts": {
+    "test": "mocha test.js"
+  },
+  "keywords": [
+    "sass",
+    "unit"
+  ],
+  "author": "Lu Nelson",
+  "license": "MIT"
+}
