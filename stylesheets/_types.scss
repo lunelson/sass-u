@@ -1,0 +1,57 @@
+//
+// check type
+//
+
+@function is-number($args...) {
+  @each $arg in $args { @if type-of($arg) != 'number' { @return false; } }
+  @return true;
+}
+
+@function is-string($args...) {
+  @each $arg in $args { @if type-of($arg) != 'string' { @return false; } }
+  @return true;
+}
+
+@function is-list($args...) {
+  @each $arg in $args { @if type-of($arg) != 'list' { @return false; } }
+  @return true;
+}
+
+@function is-map($args...) {
+  @each $arg in $args { @if type-of($arg) != 'map' { @return false; } }
+  @return true;
+}
+
+//
+// check subtype
+//
+
+@function is-zero($args...) {
+  @if not is-number($args...) { @return false; }
+  @each $arg in $args { @if __strip($arg) != 0 { @return false; } }
+  @return true;
+}
+
+@function is-unitless($args...) {
+  @if not is-number($args...) { @return false; }
+  @each $arg in $args { @if not unitless($arg) { @return false; } }
+  @return true;
+}
+
+@function is-relative($args...){
+  @if not is-number($args...) { @return false; }
+  @each $arg in $args { @if not index('%' 'ex' 'rem' 'em' 'vh' 'vw' 'vmin' 'vmax', unit($arg)) { @return false; } }
+  @return true;
+}
+
+@function is-absolute($args...){
+  @if not is-number($args...) { @return false; }
+  @each $arg in $args { @if index('%' 'ex' 'rem' 'em' 'vh' 'vw' 'vmin' 'vmax', unit($arg)) or unitless($arg) { @return false; } }
+  @return true;
+}
+
+@function has-unit($unit, $args...) {
+  @if not is-number($args...) { @return false; }
+  @each $arg in $args { @if not unit($arg) == $unit { @return false; } }
+  @return true;
+}
