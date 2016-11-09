@@ -1,0 +1,40 @@
+//
+//
+// --------------------------------------------------------------------------
+
+@function __quotify($value) { @return '"#{$value}"'; }
+
+@function json-stringify--bool($boolean) { @return $boolean; }
+
+@function json-stringify--null($null) { @return "null"; }
+
+@function json-stringify--number($number) { @return if(unitless($number), $number, __quotify($number)); }
+
+@function json-stringify--string($string) { @return __quotify($string); }
+
+@function json-stringify--color($color) { @return __quotify($color); }
+
+@function json-stringify--list($list) {
+  $str: "";
+  @each $item in $list { $str: $str + ', ' + json-stringify($item); }
+  @return '[' + str-slice($str, 3) + ']';
+}
+
+@function json-stringify--map($map) {
+  $str: "";
+  @each $key, $value in $map { $str: $str + ', ' + __quotify($key) + ': ' + json-stringify($value); }
+  @return '{' + str-slice($str, 3) + '}';
+}
+
+//
+//
+// --------------------------------------------------------------------------
+
+@function json-stringify($value) {
+  $type: type-of($value);
+  @if not function_exists('json-stringify--#{$type}') { @return error("Unknown type for #{$value} (#{$type})."); }
+  @return call('json-stringify--#{$type}', $value);
+}
+
+@function json-valid-map($map) { @return if(type-of($map) == 'map', is-string(map-keys($map)...), false); }
+

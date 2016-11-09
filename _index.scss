@@ -1,32 +1,13 @@
-//                                       _ _
-//                                      (_) |
-//  ___  __ _ ___ ___ ______ _   _ _ __  _| |_
-// / __|/ _` / __/ __|______| | | | '_ \| | __|
-// \__ \ (_| \__ \__ \      | |_| | | | | | |_
-// |___/\__,_|___/___/       \__,_|_| |_|_|\__|
+//  ___  __ _ ___ ___ ______ _   _
+// / __|/ _` / __/ __|______| | | |
+// \__ \ (_| \__ \__ \      | |_| |
+// |___/\__,_|___/___/       \__,_|
 
-@import 'stylesheets/types';
+@import 'node_modules/sass-maps-plus/index';
 
-//
-// manipulate units
-//
-
-@function one($unit:'') {
-  $one: ('em': 1em, 'ex': 1ex, 'ch': 1ch, 'rem': 1rem, '%': 1%, 'vw': 1vw, 'vh': 1vh, 'vmin': 1vmin, 'vmax': 1vmax, 'cm': 1cm, 'mm': 1mm, 'in': 1in, 'px': 1px, 'pt': 1pt, 'pc': 1pc, 'deg': 1deg, 'grad': 1grad, 'rad': 1rad, 'turn': 1turn, 's': 1s, 'ms': 1ms, 'dpi': 1dpi, 'dpcm': 1dpcm, 'dppx': 1dppx);
-  @return map-get($one, $unit) or 1;
-}
-
-@function strip($n) {
-  @if not is-number($n) { @return error("cannot manipulate unit of non-number"); }
-  @return if(unitless($n), $n, $n / one(unit($n)));
-}
-
-@function assert($n, $unit: '') {
-  @if not is-number($n) { @return error("cannot manipulate unit of non-number"); }
-  @return strip($n) * one($unit);
-}
-
-@function strip-alt($n){
-  @if not is-number($n) { @return error("cannot manipulate unit of non-number"); }
-  @return if(unitless($n), $n, $n / (0 * $n + 1));
-}
+@import 'sass/types';
+@import 'sass/json';
+@import 'sass/selectors';
+@import 'sass/strings';
+@import 'sass/lists';
+@import 'sass/units';
