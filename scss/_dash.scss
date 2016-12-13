@@ -1,0 +1,99 @@
+//      _           _
+//     | |         | |
+//   __| | __ _ ___| |__
+//  / _` |/ _` / __| '_ \
+// | (_| | (_| \__ \ | | |
+//  \__,_|\__,_|___/_| |_|
+
+
+
+//
+// DATA
+// --------------------------------------------------------------------------
+
+@function _map($list, $func-and-args...) {
+  @if length($func-and-args) < 1 { @return $list; }
+  $out: (); $sep: list-separator($list);
+  $fn: nth($func-and-args, 1);
+  $args: list-slice($func-and-args, 2);
+  @each $item in $list {
+    $out: append($out, call($fn, $item, $args...), $sep);
+  }
+  @return $out;
+}
+
+
+
+@function data-merge($target, $source) {
+  $source: $source or ();
+  $target: $target or ();
+  $result: ();
+
+  // if both source and target are map-compatible
+  @if is-map($source) and is-map($target) {
+    $result: $target;
+    @each $key, $s-value in $source {
+      $t-value: map-get($target, $key);
+      @if index('list' 'map', type-of($s-value)) or index('list' 'map', type-of($t-value)) {
+        $result: map-merge($result, ($key: data-merge($t-value, $s-value)));
+      } @else {
+        $result: map-merge($result, ($key: $s-value));
+      }
+    }
+  }
+
+  // else if either source or target is a list
+  @else if is-list($source) or is-list($target) {
+    $result: join($result, $target, 'space');
+    @if length($source) > 0 {
+      @for $n from 1 through length($source) {
+        $s-item: _nth($source, $n);
+        $t-item: _nth($target, $n);
+        @if not index($target, $s-item) {
+          $result: append($result, $s-item);
+        }
+      }
+    }
+  }
+
+  // else source overwrites target
+  @else {
+    $result: $source;
+  }
+  @return $result;
+}
+
+@function implode($sub, $list) {
+  $str: '';
+  @if type-of($sub) != 'string' {
+    @return 'non-string supplied as sub-string to implode';
+  } @else if type-of($list) != 'list' or length($list) < 1 {
+    @return 'non-list or zero-length-list supplied to implode';
+  } @else {
+    @for $n from 1 through length($list) {
+      $item: nth($list, $n);
+      @if index('list' 'map', type-of($item)) {
+        @error 'implode only works with single-dimension lists of non-list/-map items';
+      }
+      $str: $str + if($n == 1, '#{$item}', '#{$sub}#{$item}');
+    }
+  }
+  @return $str;
+}
+
+@function explode($sub, $str) {
+  $list: ();
+  @if type-of($sub) != 'string' or type-of($str) != 'string' {
+    @return 'non-string(s) supplied to explode';
+  } @else if str-length($str) < 1 {
+    @return 'zero-length string supplied to explode';
+  } @else {
+    @while str-length($str) > 0 {
+      $index: str-index($str, $sub);
+      $item: str-slice($str, 1, ($index or -1) - 1);
+      $list: append($list, $item);
+      $str: str-slice($str, ($index or 1) + str-length($sub));
+    }
+  }
+  @return $list;
+}

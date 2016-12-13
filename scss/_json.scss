@@ -37,4 +37,3 @@
 }
 
 @function json-valid-map($map) { @return if(type-of($map) == 'map', is-string(map-keys($map)...), false); }
-

@@ -1,0 +1,29 @@
+@import "../../index";
+
+@function addFoo($item) { @return $item + 'foo'; }
+
+
+.list-test {
+  // list-slice: list-slice(1 2 3 4, 1, 1);
+  // str-slice: str-slice("1234", 1, 1);
+  // list-slice: list-slice(1 2 3 4, 1);
+  // str-slice: str-slice("1234", 1);
+  // list-slice: list-slice(1 2 3 4, 1, -2);
+  // str-slice: str-slice("1234", 1, -2);
+  // list-slice: list-slice(1 2 3 4, 1, 2);
+  // str-slice: str-slice("1234", 1, 2);
+  // list-slice: slice(1 2 3 4, 1, 2);
+  // str-slice: slice("1234", 1, 2);
+  map: _map(1 2 3 4, 'addFoo');
+
+}
+
+.test {
+  zero: inspect(implode('-', ()));
+  zero: inspect(explode('-', ''));
+  zero: inspect(implode('-', a b c));
+  zero: inspect(explode('-', 'a-b-c-d'));
+  zero: inspect(explode(',', 'a,b,c,d'));
+  zero: inspect(explode(' ', 'a b c d'));
+  test: inspect(str-nth('hello world', 2));
+}

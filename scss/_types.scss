@@ -18,7 +18,9 @@
 }
 
 @function is-map($args...) {
-  @each $arg in $args { @if type-of($arg) != 'map' { @return false; } }
+  @each $arg in $args {
+    $test: type-of($arg) == 'map' or (type-of($arg) == 'list' and length($arg) == 0);
+    @if not $test { @return false; } }
   @return true;
 }
 

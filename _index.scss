@@ -5,9 +5,15 @@
 
 @import 'node_modules/sass-maps-plus/index';
 
-@import 'sass/types';
-@import 'sass/json';
-@import 'sass/selectors';
-@import 'sass/strings';
-@import 'sass/lists';
-@import 'sass/units';
+@import 'scss/types';
+@import 'scss/units';
+@import 'scss/numbers';
+@import 'scss/strings';
+@import 'scss/lists';
+@import 'scss/maps';
+@import 'scss/dash';
+@import 'scss/json';
+@import 'scss/selectors';
+@import 'scss/rules';
+@import 'scss/debugs';
+@import 'scss/meta';

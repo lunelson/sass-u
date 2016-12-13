@@ -1,0 +1,42 @@
+//              _                 _
+//             (_)               | |
+//   __ _ _ __  _ _ __ ___ ______| |_ _ __ __ _ _ __  ___
+//  / _` | '_ \| | '_ ` _ \______| __| '__/ _` | '_ \/ __|
+// | (_| | | | | | | | | | |     | |_| | | (_| | | | \__ \
+//  \__,_|_| |_|_|_| |_| |_|      \__|_|  \__,_|_| |_|___/
+
+
+@mixin animation($arglist...) {
+  $name: unique-id(); // name for @keyframes
+  $arglist: join((), $arglist, 'space'); // conform args as SSV
+  animation: $arglist $name;
+  @keyframes #{$name} { @content; }
+}
+
+// KEYWORDS
+
+@function opposite($dirs) {
+  $out: ();
+  $opposites: ('top': bottom, 'right': left, 'bottom': top, 'left': right, 'ltr': rtl, 'rtl': ltr);
+  @each $dir in $dirs {
+    $opposite: map-get($opposites, $dir);
+    @if $opposite {$out: append($out, $opposite); } }
+  @return $out;
+}
+
+// COUNTER
+
+@mixin list-counter($selector: null, $before:'', $after:''){
+  $counter: unique-id();
+  list-style-type: none;
+  counter-reset: $counter;
+  #{children($selector)} {
+    counter-increment: $counter;
+    &:before {
+      content: '#{$before}' counter($counter) '#{$after}';
+      @content;
+    }
+  }
+}
+
+

@@ -1,0 +1,13 @@
+.list-test {
+  map: "1foo" "2foo" "3foo" "4foo";
+}
+
+.test {
+  zero: "non-list or zero-length-list supplied to implode";
+  zero: "zero-length string supplied to explode";
+  zero: "a-b-c";
+  zero: 'a" "b" "c" "d';
+  zero: 'a" "b" "c" "d';
+  zero: 'a" "b" "c" "d';
+  test: "e";
+}
