@@ -1,8 +1,0 @@
-// function apply
-@function apply($fn, $arglist) { @return call($fn, $arglist...); }
-
-@function slice($iterable, $start-at, $end-at: -1) {
-  $type: type-of($iterable); $type: if($type == 'string', 'str', $type);
-  @if not index('str' 'list', $type) { @return error; }
-  @return call('#{$type}-slice', $iterable, $start-at, $end-at);
-}

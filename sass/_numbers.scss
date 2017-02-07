@@ -44,14 +44,16 @@
   @return ($n/$g, $d/$g)
 }
 
-@function limit($number, $limit1, $limit2) {
-  $max: max($limit1, $limit2);
-  $min: min($limit1, $limit2);
-  @if comparable($number, $min) and comparable($number, $max) {
-    $number: min(max($number, $min), $max);
+@function clamp($n, $a, $b){
+  $min: min($a, $b); $max: max($a, $b);
+  @if not comparable($n, $a) or not comparable($n, $b) {
+    @return error('non-comparable numbers provided to clamp / limit');
   }
-  @return $number;
+  @return min(max($n, $min), $max);
 }
+
+@function limit($n, $a, $b){ @return clamp($n, $a, $b); }
+@function is-in-range($n, $a, $b){ @return clamp($n, $a, $b) == $n; }
 
 @function E() { @return 2.71828182845; }
 @function PI() { @return 3.14159265359; }

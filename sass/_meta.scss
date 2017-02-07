@@ -1,0 +1,46 @@
+@function _apply($fn, $arglist) { @return call($fn, $arglist...); }
+
+@function _remove($list, $tests...) {
+  @if type-of($list) == 'map' { @return map-remove($list, $tests...); }
+  @if type-of($list) == 'string' { @return str-remove($list, $tests...); }
+  $out:(); $sep: list-separator($list);
+  @if length($tests) == 0 { $tests: null false ''; }
+  @if length($list) == 1 { $list: nth($list, 1); }
+  @each $item in $list {
+    @if not index($tests, $item) { $out: append($out, $item, $sep); } }
+  @return $out;
+}
+
+@function _compact($list) { @return _remove($list); }
+@function _reject($list) { @return _remove($list); }
+
+@function _nth($list, $n) {
+  $type: type-of($list);
+  @if $type == 'string' { @return str-nth($list, $n); }
+  @if not index('list' 'map',$type) { @return error('argument to _nth() must be string, list or map'); }
+
+  $length: length($list);
+  @if $n < 0 { $n: $n + $length + 1; } // kinda dumb
+  $n: clamp($n, 1, $length); // kinda dumb
+  @if $n > $length { @return null; }
+  @return nth($list, $n);
+}
+
+@function _first($list) { @return _nth($list, 1); }
+@function _last($list) { @return _nth($list, length($list)); }
+
+@function _slice($list, $m: 1, $n: -1, $sep: list-separator($list)) {
+  $type: type-of($list);
+  @if $type == 'string' { @return str-slice($list, $m, $n); }
+  @if not index('list' 'map', $type) { @return error('argument to _slice() must be string, list or map'); }
+
+  $out: (); $length: length($list);
+  @if $n < 0 { $n: $n + $length + 1; } // kinda dumb
+  $n: clamp($n, 1, $length); // kinda dumb
+  @if $m > 0 and $n >= $m {
+    @for $i from $m through $n {
+      $out: if($i <= $length, append($out, nth($list, $i), $sep), $out);
+    }
+  }
+  @return $out;
+}
