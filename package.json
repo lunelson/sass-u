@@ -1,25 +1,35 @@
 {
   "name": "sass-u",
   "version": "0.9.0",
-  "description": "Low level utilities for Sass",
+  "description": "my sass utilities",
   "main": "_index.scss",
+  "directories": {
+    "test": "test"
+  },
+  "private": true,
   "scripts": {
     "test": "gulp test"
   },
+  "author": "Lu Nelson",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lunelson/sass-u.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lunelson/sass-u/issues"
+  },
+  "homepage": "https://github.com/lunelson/sass-u#readme",
   "keywords": [
     "libsass",
     "sass",
     "utilities",
     "utility"
   ],
-  "author": "Lu Nelson",
-  "license": "MIT",
   "dependencies": {
     "sass-calc": "github:lunelson/sass-calc",
     "sass-maps-plus": "github:lunelson/sass-maps-plus",
-    "sass-throw": "github:lunelson/sass-throw",
-    "sass-to-js": "github:lunelson/sass-to-js",
-    "sass-u": "github:lunelson/sass-u"
+    "sass-throw": "github:lunelson/sass-throw"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
