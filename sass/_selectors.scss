@@ -1,4 +1,16 @@
 //
+// base and mult
+//
+
+@function base-class($base) { @return selector-parse('.#{$base}, [class^="#{$base}--"], [class*=" #{$base}--"]'); }
+@function mod-class($base, $mod, $except: ('base')) { @return selector-parse(if(index($except, $mod), '.#{$base}, .#{$base}--#{$mod}', '.#{$base}--#{$mod}')); }
+
+@mixin base-class($args...) { #{base-class($args...)} { @content; } }
+@mixin mod-class($args...) { #{mod-class($args...)} { @content; } }
+
+
+
+//
 // previous
 // --------------------------------------------------------------------------
 
@@ -26,11 +38,11 @@
     $out: ();
     @each $list in & {
       $last: nth($list, length($list));
-      @if not index($out, $last) {
+      @if not index($out, $last) and length($last) > 0 {
         $out: append($out, $last, 'comma');
       }
     }
-    @return selector-parse($out);
+    @return if($out!=(), selector-parse($out), null);
   }
 
   // get initial parents in & list(s)
@@ -38,11 +50,11 @@
     $out: ();
     @each $list in & {
       $initial: list-slice($list, 1,  length($list) - 1);
-      @if not index($out, $initial) {
+      @if not index($out, $initial) and length($initial) > 0 {
         $out: append($out, $initial, 'comma');
       }
     }
-    @return selector-parse($out);
+    @return if($out!=(), selector-parse($out), null);
   }
 
   @function insert-parents($selectors, $combinator: '') {
