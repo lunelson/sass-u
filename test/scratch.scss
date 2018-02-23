@@ -1,12 +1,11 @@
 // peerDependencies
 
 @import '@lunelson/sass-throw/index';
-@import '@lunelson/sass-maps-plus/index';
-@import '@lunelson/sass-calc/index';
 
 // self
 @import '../index';
 
 .test {
   out: assert(3rem, 'ex');
+  out: assert(3rem, 'em');
 }
