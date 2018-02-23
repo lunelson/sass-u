@@ -1,6 +1,6 @@
 # sass-u
 
-
+[![Build Status](https://travis-ci.org/lunelson/sass-u.svg?branch=master)](https://travis-ci.org/lunelson/sass-u)
 
 "U" = my utilities, but also my learnings 😉 ...use at own risk.
 
