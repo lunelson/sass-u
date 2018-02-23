@@ -1,40 +1,46 @@
 {
-  "name": "sass-u",
-  "version": "0.9.0",
-  "description": "my sass utilities",
-  "main": "_index.scss",
-  "directories": {
-    "test": "test"
-  },
-  "private": true,
-  "scripts": {
-    "test": "gulp test"
-  },
-  "author": "Lu Nelson",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lunelson/sass-u.git"
-  },
-  "bugs": {
-    "url": "https://github.com/lunelson/sass-u/issues"
-  },
-  "homepage": "https://github.com/lunelson/sass-u#readme",
+  "name": "@lunelson/sass-u",
+  "version": "0.8.0",
+  "description": "Collected Sass utility functions",
   "keywords": [
     "libsass",
     "sass",
     "utilities",
     "utility"
   ],
-  "dependencies": {
-    "sass-calc": "github:lunelson/sass-calc",
-    "sass-maps-plus": "github:lunelson/sass-maps-plus",
-    "sass-throw": "github:lunelson/sass-throw"
+  "homepage": "https://github.com/lunelson/sass-u#readme",
+  "bugs": {
+    "url": "https://github.com/lunelson/sass-u/issues"
+  },
+  "license": "MIT",
+  "author": "Lu Nelson",
+  "main": "_index.scss",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lunelson/sass-u.git"
+  },
+  "scripts": {
+    "start": "gulp",
+    "test": "gulp test"
   },
   "devDependencies": {
+    "@lunelson/sass-calc": "^0.9.1",
+    "@lunelson/sass-maps-plus": "^0.9.0",
+    "@lunelson/sass-throw": "^1.0.1",
     "gulp": "^3.9.1",
     "gulp-diff": "^1.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0"
+  },
+  "peerDependencies": {
+    "@lunelson/sass-calc": "^0.9.1",
+    "@lunelson/sass-maps-plus": "^0.9.0",
+    "@lunelson/sass-throw": "^1.0.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
