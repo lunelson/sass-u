@@ -1,5 +1,6 @@
 # sass-u
 
+[![npm published v](https://img.shields.io/npm/v/@lunelson/sass-u.svg)]()
 [![Build Status](https://travis-ci.org/lunelson/sass-u.svg?branch=master)](https://travis-ci.org/lunelson/sass-u)
 
 "U" = my utilities, but also my learnings 😉 ...use at own risk.
