@@ -30,7 +30,6 @@
   $ref-unit: unit($ref);
   // checks
   @if $ref-unit == '%' { @warn 'cannot relativize value to a relative reference; returning input value'; @return $val; }
-  @if index($ref-unit $val-unit, 'em') { @warn 'cannot reliably relativize to em reference; plz use rem'; }
   // corrections
   @if $val-unit == '%' { $ref: 100; }
   @else if $val-unit == 'px' and index('em' 'rem', $ref-unit) { $ref: strip($ref) * $rem-px; }
