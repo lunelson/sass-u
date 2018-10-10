@@ -1,6 +1,6 @@
 {
   "name": "@lunelson/sass-u",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "Collected Sass utility functions",
   "keywords": [
     "libsass",
