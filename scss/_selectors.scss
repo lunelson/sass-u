@@ -22,7 +22,7 @@
   }
 
   // get last parents in & list(s)
-  @function last-parents {
+  @function last-parents() {
     $out: ();
     @each $list in & {
       $last: nth($list, length($list));
@@ -34,7 +34,7 @@
   }
 
   // get initial parents in & list(s)
-  @function initial-parents {
+  @function initial-parents() {
     $out: ();
     @each $list in & {
       $initial: list-slice($list, 1,  length($list) - 1);

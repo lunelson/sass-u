@@ -32,8 +32,8 @@
 
 @function json-stringify($value) {
   $type: type-of($value);
-  @if not function_exists('json-stringify--#{$type}') { @return error("Unknown type for #{$value} (#{$type})."); }
-  @return call('json-stringify--#{$type}', $value);
+  @if not function_exists('json-stringify--#{$type}') { @return throw-error("Unknown type for #{$value} (#{$type})."); }
+  @return call(get-function('json-stringify--#{$type}'), $value);
 }
 
 @function json-valid-map($map) { @return if(type-of($map) == 'map', is-string(map-keys($map)...), false); }

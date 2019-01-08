@@ -16,27 +16,38 @@
   "author": "Lu Nelson",
   "main": "_index.scss",
   "directories": {
-    "test": "test"
+    "test": "tests"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lunelson/sass-u.git"
   },
   "scripts": {
-    "start": "gulp",
-    "test": "gulp test"
+    "test": "ava",
+    "start": "ava --watch"
   },
   "devDependencies": {
-    "@lunelson/sass-throw": "^1.0.1",
-    "gulp": "^3.9.1",
-    "gulp-diff": "^1.0.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0"
+    "@lunelson/sass-throw": "^2.0.0-rc.4",
+    "ava": "^1.0.1",
+    "del": "^3.0.0",
+    "node-sass": "^4.11.0",
+    "sass": "^1.15.3",
+    "write": "^1.0.3"
   },
   "peerDependencies": {
-    "@lunelson/sass-throw": "^1.0.1"
+    "@lunelson/sass-throw": "^2.0.0-rc.4"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "ava": {
+    "files": [
+      "tests/*{.js,.scss}"
+    ],
+    "sources": [
+      "_index.scss",
+      "scss/**/*.scss",
+      "!**/_*/**"
+    ]
   }
 }

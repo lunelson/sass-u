@@ -17,7 +17,7 @@
   $fn: nth($func-and-args, 1);
   $args: list-slice($func-and-args, 2);
   @each $item in $list {
-    $out: append($out, call($fn, $item, $args...), $sep);
+    $out: append($out, call(get-function($fn), $item, $args...), $sep);
   }
   @return $out;
 }

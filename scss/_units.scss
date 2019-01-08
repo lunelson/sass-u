@@ -10,17 +10,17 @@
 
 // strip unit from number
 @function strip($n) {
-  @if not is-number($n) { @return error("cannot manipulate unit of non-number"); }
+  @if not is-number($n) { @return throw-error("cannot manipulate unit of non-number"); }
   @return if(unitless($n), $n, $n / one(unit($n)));
 }
 @function strip-alt($n){
-  @if not is-number($n) { @return error("cannot manipulate unit of non-number"); }
+  @if not is-number($n) { @return throw-error("cannot manipulate unit of non-number"); }
   @return if(unitless($n), $n, $n / (0 * $n + 1));
 }
 
 // add/coerce unit on number
 @function assert($n, $unit: '') {
-  @if not is-number($n) { @return error("cannot manipulate unit of non-number"); }
+  @if not is-number($n) { @return throw-error("cannot manipulate unit of non-number"); }
   @return strip($n) * one($unit);
 }
 

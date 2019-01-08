@@ -1,4 +1,4 @@
-@function _apply($fn, $arglist) { @return call($fn, $arglist...); }
+@function _apply($fn, $arglist) { @return call(get-function($fn), $arglist...); }
 
 @function _remove($list, $tests...) {
   @if type-of($list) == 'map' { @return map-remove($list, $tests...); }
@@ -17,7 +17,7 @@
 @function _nth($list, $n) {
   $type: type-of($list);
   @if $type == 'string' { @return str-nth($list, $n); }
-  @if not index('list' 'map',$type) { @return error('argument to _nth() must be string, list or map'); }
+  @if not index('list' 'map',$type) { @return throw-error('argument to _nth() must be string, list or map'); }
 
   $length: length($list);
   @if $n < 0 { $n: $n + $length + 1; } // kinda dumb
@@ -32,7 +32,7 @@
 @function _slice($list, $m: 1, $n: -1, $sep: list-separator($list)) {
   $type: type-of($list);
   @if $type == 'string' { @return str-slice($list, $m, $n); }
-  @if not index('list' 'map', $type) { @return error('argument to _slice() must be string, list or map'); }
+  @if not index('list' 'map', $type) { @return throw-error('argument to _slice() must be string, list or map'); }
 
   $out: (); $length: length($list);
   @if $n < 0 { $n: $n + $length + 1; } // kinda dumb

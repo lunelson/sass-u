@@ -47,7 +47,7 @@
 @function clamp($n, $a, $b){
   $min: min($a, $b); $max: max($a, $b);
   @if not comparable($n, $a) or not comparable($n, $b) {
-    @return error('non-comparable numbers provided to clamp / limit');
+    @return throw-error('non-comparable numbers provided to clamp / limit');
   }
   @return min(max($n, $min), $max);
 }
